@@ -1,9 +1,9 @@
 ========================================
-           TOKO SERBA ADA AHTONG        
+           TOKO SERBA ADA UNCLE         
        Jl. Pembangunan No.123 Medan     
            Telp. (62) 8227211872        
 ========================================
-Kasir : agus            Tgl: 2025/5/12 
+Kasir : agus            Tgl: 2025/5/13 
 Struk : 156
 ----------------------------------------
 No   Nama Barang   Qty  Harga  Subtotal  
@@ -12,7 +12,6 @@ No   Nama Barang   Qty  Harga  Subtotal
 ----------------------------------------
                     Total: Rp   40.000
                     Uang : Rp   40.000
-                 Kembalian :         0
 ========================================
-Terima kasih telah berbelanja di Ahtong
+ Terima kasih telah berbelanja di Uncle 
 ========================================

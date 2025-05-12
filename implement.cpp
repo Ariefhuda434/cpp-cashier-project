@@ -24,26 +24,38 @@ int to_int(string s)
 //* PARENT
 void Kasir::head()
 {
-     cout <<BRIGHT_CYAN<< '+' << setfill('-') << setw(w1) << '+' << setw(w2) << '+' << setw(w2) << '+' << RESET_TEXT<< endl;
-     cout << '|' << setfill(' ') << setw(w1) << right << "ID|" << setw(w2) << right << "Nama Barang|" << setw(w2) <<right<< "Harga|" << endl;
-     cout << '+' << setfill('-')  << setw(w1) << '+' << setw(w2) << '+'<< setw(w2) << '+' << endl;
+    cout << BRIGHT_CYAN << '+' << setfill('-') << setw(w1-1) << '-' 
+         << '+' << setw(w2-1) << '-' 
+         << '+' << setw(w2-1) << '-' 
+         << '+' << RESET_TEXT << endl;
+
+    cout << BRIGHT_CYAN << '|' << RESET_TEXT 
+         << setfill(' ') << setw(w1 + 3) << right<<MAGENTA_TEXT << "ID|" <<RESET_TEXT<< BRIGHT_CYAN << '|'
+         << RESET_TEXT << MAGENTA_TEXT<< setw(w2-1) << right << "Nama Barang|"<<RESET_TEXT << BRIGHT_CYAN << '|'
+         << RESET_TEXT << setw(w2 + 1 ) << right<<MAGENTA_TEXT<< "Harga"<<RESET_TEXT << BRIGHT_CYAN << '|' 
+         << RESET_TEXT << endl;
+
+    cout << BRIGHT_CYAN << '+' << setfill('-') << setw(w1-1) << '-' 
+         << '+' << setw(w2-1) << '-' 
+         << '+' << setw(w2-1) << '-' 
+         << '+' << RESET_TEXT << endl;
 }
 
 void Kasir::menu() 
 {
     int totalWidth = w1 + w2 * 2;
+cout << BRIGHT_YELLOW << '+' << string(totalWidth-1, '-') << '+' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '|' << setw(totalWidth-1) << left << " Tambah ke Keranjang (1)" << BRIGHT_YELLOW << '|' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '+' << string(totalWidth-1, '-') << '+' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '|' << setw(totalWidth-1) << left << " Hapus dari Keranjang (2)" << BRIGHT_YELLOW << '|' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '+' << string(totalWidth-1, '-') << '+' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '|' << setw(totalWidth-1) << left << " Kurangi Barang (3)" << BRIGHT_YELLOW << '|' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '+' << string(totalWidth-1, '-') << '+' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '|' << setw(totalWidth-1) << left << " Filter Barang (4)" << BRIGHT_YELLOW << '|' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '+' << string(totalWidth-1, '-') << '+' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '|' << setw(totalWidth-1) << left << " Keranjang & CheckOut (5)" << BRIGHT_YELLOW << '|' << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << '+' << string(totalWidth-1, '-') << '+' << RESET_TEXT << endl;
 
-    cout << '+' << string(totalWidth-1, '-') << '+' << endl;
-    cout << '|' << setw(totalWidth-1) << left << " Tambah ke Keranjang (1)" << '|' << endl;
-    cout << '+' << string(totalWidth-1, '-') << '+' << endl;
-    cout << '|' << setw(totalWidth-1) << left << " Hapus dari Keranjang (2)" << '|' << endl;
-    cout << '+' << string(totalWidth-1, '-') << '+' << endl;
-    cout << '|' << setw(totalWidth-1) << left << " Kurangi Barang (3)" << '|' << endl;
-    cout << '+' << string(totalWidth-1, '-') << '+' << endl;
-    cout << '|' << setw(totalWidth-1) << left << " Filter Barang (4)" << '|' << endl;
-    cout << '+' << string(totalWidth-1, '-') << '+' << endl;
-    cout << '|' << setw(totalWidth-1) << left << " Keranjang & CheckOut (5)" << '|' << endl;
-    cout << '+' << string(totalWidth-1, '-') << '+' << endl;
 }
 
 void Kasir::parse()
@@ -58,18 +70,20 @@ void Kasir::parse()
 
 void Kasir::tampilkan()
 {
-     system ("cls");
-     ifstream file(namaFile);
-     head();
-     while(getline(file, container))
-     {
-          parse();
-          int rupiahku = to_int(arrayData[2]);
-          cout << '|' << setfill(' ') << setw(w1) << arrayData[0]
-                                      << setw(w2) << arrayData[1] 
-                                      << setw(w2) << Rupiah(rupiahku) + '|' << endl;
-     }
-     file.close();
+system("cls");
+ifstream file(namaFile);
+head();
+while (getline(file, container)) {
+    parse();
+    int rupiahku = to_int(arrayData[2]);
+    
+    cout << BRIGHT_CYAN << '|' << RESET_TEXT
+         << setfill(' ') << RED_TEXT << setw(w1 - 1) << arrayData[0] << BRIGHT_CYAN << '|' << RESET_TEXT
+         << BLUE_TEXT << setw(w2 - 1) << arrayData[1] << BRIGHT_CYAN << '|' << RESET_TEXT
+         << BRIGHT_GREEN << setw(w2 - 1) << Rupiah(rupiahku) << BRIGHT_CYAN << '|' << RESET_TEXT << endl;
+}
+file.close();
+
 }
 
 string Kasir::Rupiah(int angka) {
@@ -98,9 +112,11 @@ void Produk::tampilkan()
 
 void Produk::filter()
 {
-     cout << "Filter Berdasarkan: " << endl;
-     cout << "1. Barang" << endl << "2. Makanan" << endl << "3. Pakaian" << endl;
-     cout << "Pilihan: ";
+    cout << BRIGHT_CYAN << "Filter Berdasarkan:" << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << "1. Barang" << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << "2. Makanan" << RESET_TEXT << endl;
+cout << BRIGHT_YELLOW << "3. Pakaian" << RESET_TEXT << endl;
+     cout << BRIGHT_GREEN << "Pilihan: " << RESET_TEXT;
      cin >> pilihan;
      if (pilihan == 1) pilihan = 'b'; //*pilihannya diwakili huruf biar ga ribet dibawah
      if (pilihan == 2) pilihan = 'm';
@@ -116,9 +132,17 @@ void Produk::filter()
           parse();
           container = arrayData[0]; //* mengubah elemen (cth: "lost") menjadi array ('l', 'o', 's', 't') 
           int Harga = to_int(arrayData[2]);
-          if (container[0] == pilihan) cout << '|' << setfill(' ') << setw(w1) << arrayData[0]
-                                    << setw(w2) << arrayData[1] 
-                                    << setw(w2) << Rupiah(Harga) + '|'<< endl;
+         if (container[0] == pilihan) {
+         cout << CYAN_TEXT << '|' << RESET_TEXT
+         << BRIGHT_CYAN <<setfill(' ') << setw(w1-1) << arrayData[0]
+         << CYAN_TEXT << '|' << RESET_TEXT
+         << BLUE_TEXT<< setw(w2-1) << arrayData[1] 
+         << YELLOW_TEXT << '|' << RESET_TEXT
+         << BRIGHT_GREEN <<setw(w2-1) << Rupiah(Harga) 
+         << CYAN_TEXT << '|' << RESET_TEXT
+         << endl;
+}
+
 
      }
      data.close();
@@ -129,9 +153,15 @@ void Produk::filter()
 //*CHILD2 
 void Keranjang::head()
 {
-    cout << setw(w1+5) <<right<< '+' << setfill('-')  << setw(w1) << '+' << setw(w2-20) << '+'<< setw(w2-15) << '+' << endl;
-    cout << setfill(' ') << setw(w1+5) <<right<< '|' <<setfill(' ') <<setw(w1)<<right << "ID|" << setw(w2-20) << "Nama Barang|" << setw(w2-15) << "Jumlah|" << endl;
-    cout << setw(w1+5) << '+' << setfill('-')  << setw(w1) << '+' << setw(w2-20) << '+'<< setw(w2-15) << '+' << endl;
+cout << BRIGHT_CYAN << setw(w1+5) << right << '+' << setfill('-')  << setw(w1) << '+' 
+     << setw(w2-20) << '+' << setw(w2-15) << '+' << RESET_TEXT << endl;
+cout << BRIGHT_CYAN << setfill(' ') << setw(w1+5) << right << '|' 
+     << setfill(' ') << setw(w1) << right << "ID||" 
+     << setw(w2-20) << "Nama Barang||" 
+     << setw(w2-15) << "Jumlah|" << RESET_TEXT << endl;
+cout << BRIGHT_CYAN << setw(w1+5) << '+' << setfill('-')  << setw(w1) << '+' 
+     << setw(w2-20) << '+' << setw(w2-15) << '+' << RESET_TEXT << endl;
+
 }
 void Keranjang::tampilkan()
 {
@@ -140,15 +170,20 @@ void Keranjang::tampilkan()
      while(getline(file, container))
      {
           parse();
-          cout << setw(w1+5) << setfill(' ') << '|'  << setw(w1) << arrayData[0]
-                                      << setw(w2-20) << arrayData[1] 
-                                      << setw(w2-15) << arrayData[3] << endl;
+     cout << BRIGHT_CYAN << setw(w1+5) << setfill(' ') << '|'  
+      << setw(w1) << arrayData[0]+'|'
+      << setw(w2-21) << arrayData[1]<<'|' 
+      << setw(w2-15) << arrayData[3] << RESET_TEXT << endl;
+
      }
      file.close();
 
-     cout << setw(w1+5) << '+' << setfill('-') << setw(w1) << "+" << setw(w2+6) << "+" << endl;
-     cout << setw(w1+5) << setfill(' ') << '|'  << setw(w1) << "Tutup Keranjang (6)|" << setw(w2-3) << "CheckOut (7)|" << endl;
-     cout << setw(w1+5) << '+' << setfill('-') << setw(w2+w1+6) << "+" << endl;
+     cout << BRIGHT_BLUE << setw(w1+5) << '+' << setfill('-') << setw(w1) << "+" << setw(w2+6) << "+" << RESET_TEXT << endl;
+     cout << BRIGHT_BLUE << setw(w1+5) << right << setfill(' ') << '|'  
+     << right << BRIGHT_YELLOW << setw(w2 - 9) << "Tutup Keranjang (6)|" 
+     << BRIGHT_GREEN << setw(w2 - 15) << "CheckOut (7)|" << RESET_TEXT << endl;
+     cout << BRIGHT_BLUE << setw(w1+5) << '+' << setfill('-') << setw(w2 + w1 + 6) << "+" << RESET_TEXT << endl;
+
 }
 
 void Keranjang::tambah()
@@ -268,6 +303,8 @@ void Transaksi::gantiMetode()
           else if (pilihan == 2) metodePembayaran = "Transfer Bank (0000 1111 2222 3333)";
           else if (pilihan == 3) metodePembayaran = "Dompet Virtual (0812 3456 789)";
           else {cout << "Masukkan pilihan yang valid"; gantiMetode();}
+          metodeIs = true;
+          checkout();
 }
 
 void Transaksi::checkout()
@@ -275,8 +312,12 @@ void Transaksi::checkout()
      system ("cls");
 
      jumlah = 0; //! butuh perbaikan
-     cout << '+' << setfill('-') << setw (w1 + w2*2) << '+' << endl;
-     cout << '|' << setfill(' ') << setw(w1) << "<--  (1)|" << setw (w2*2) << "Detil Pesanan|" << endl;
+     cout << BRIGHT_CYAN << '+' << setfill('-') << setw(w1 + w2*2) << '+' << RESET_TEXT << endl;
+     cout << BRIGHT_CYAN << '|' 
+     << BRIGHT_YELLOW << setfill(' ') << setw(w1) << "<-- Kembali Ke Menu (1)|" 
+     << BRIGHT_GREEN << setw(w2*2-13) << "Detil Pesanan|" 
+     << RESET_TEXT << endl;
+
 
      ifstream keranjang("keranjang.txt");
      head();
@@ -285,9 +326,11 @@ void Transaksi::checkout()
           parse();
           int nande = to_int(arrayData[2]);
           int subtotal = 0;
-          cout << '|' << setfill(' ') << setw(w1) << arrayData[0]
-                                      << setw(w2) << arrayData[1]
-                                      << setw(w2) << 'x' + arrayData[3] +  "       " + Rupiah(nande) + '|' << endl; //! butuh perbaikan
+          cout << CYAN_TEXT << '|' << RESET_TEXT 
+          << setfill(' ') << BRIGHT_WHITE << setw(w1) << arrayData[0] << RESET_TEXT 
+          << BRIGHT_YELLOW << setw(w2) << arrayData[1] << RESET_TEXT 
+          << BRIGHT_GREEN << setw(w2-1) << 'x' + arrayData[3] +  "       " + Rupiah(nande) << CYAN_TEXT << '|' << RESET_TEXT << endl; //! butuh perbaikan warnaun dulu komentar jangan dihapus yah
+
                                       subtotal = to_int(arrayData[3]) * nande;
                                       jumlah += subtotal;
      }
@@ -296,7 +339,7 @@ void Transaksi::checkout()
      cout << '|' << setfill(' ') << setw(w1+w2) << "Total|" << setw(w2) << Rupiah(jumlah) + '|' << endl;
      cout << '+' << setfill('-') << setw (w1 + w2*2) << '+' << endl;
      cout << '|' << setfill(' ') << setw (w1 + w2) << '|' << setw(w2) << '|' << endl;  
-     cout << "|" << setfill(' ') << setw (w1 + w2) << "Metode Pembayaran: " + metodePembayaran + " |" << setw (w2) << "Ganti (2)|" << endl;
+     cout << "|" << setfill(' ') << setw (w1 + w2) <<  metodePembayaran + " |" << setw (w2) << "Pilih Metode (2)|" << endl;
      cout << '|' << setfill(' ') << setw (w1 + w2) << '|' << setw(w2) << '|' << endl;  
 
      cout << '+' << setfill('-') << setw (w1 + w2*2) << '+' << endl;
@@ -318,53 +361,65 @@ void Transaksi::checkout()
 
      if (pilihan == 1)tampilkan();
      else if (pilihan == 2) gantiMetode(); 
-     else if (pilihan == 3) kelolaPembayaran(); //* +print struk, +bersihkan isi keranjang.txt
-}
-
-void Transaksi::kelolaPembayaran(){
-     int totalHarga = 0;
-     int kurang;
-   
-     cout << "Masukan Uang Anda : \n";
-     cin >> uang;
-
-     ifstream keranjang("keranjang.txt");
-     while (getline(keranjang, container))
-     {
-         parse();
-     int hargaCheckout = to_int(arrayData[2]); 
-     int jumlahBarang = to_int(arrayData[3]); 
-         int subtotal = hargaCheckout * jumlahBarang; 
-         totalHarga += subtotal; 
+     if (metodeIs)
+     {         
+          if (pilihan == 3) {
+               
+               kelolaPembayaran();
+          }; //* +print struk, +bersihkan isi keranjang.txt
      }
-     keranjang.close();
-
-     if (uang < totalHarga) {
-          selisih = totalHarga - uang;
-          cout << "Uang Anda Kurang " << Rupiah(selisih) << endl;
-          cout << "Masukkan Uang Tambahan: ";
-          cin >> kurang;
-          cin.ignore();
-          uang += kurang;
-          while (uang < totalHarga) {
-               cout << "Masih kurang. Silakan bayar dengan cukup." << endl;
-               cout << "Masukkan uang kembali: ";
-               cin >> uang;
-               cin.ignore();
-               uang += kurang;
-           }
-      }
-  
-      if (uang > totalHarga) {
-          selisih = uang - totalHarga;
-          cout << "Kembalian Anda: " << Rupiah(selisih) << endl;
-      } else if (uang == totalHarga) {
-          cout << "Uang Anda pas." << endl;
-          uangPas = true;
-      }
-  
-   inputStruk();
+     else if(!metodeIs){
+          cout << "Kamu Belum Memilih Metode Pembayaran" << endl;
+          checkout();
+     }
+     
 }
+
+void Transaksi::kelolaPembayaran() {
+    int totalHarga = 0;
+    int kurang;
+   if (metodePembayaran == "Cash")
+   {
+        cout << "Masukan Uang Anda : \n";
+        cin >> uang;
+     
+        ifstream keranjang("keranjang.txt");
+        while (getline(keranjang, container)) {
+            parse();
+            int hargaCheckout = to_int(arrayData[2]); 
+            int jumlahBarang = to_int(arrayData[3]); 
+            int subtotal = hargaCheckout * jumlahBarang; 
+            totalHarga += subtotal; 
+        }
+        keranjang.close();
+     
+        if (uang < totalHarga) {
+            selisih = totalHarga - uang;
+            cout << "Uang Anda Kurang " << Rupiah(selisih) << endl;
+            cout << "Masukkan Uang Tambahan: ";
+            cin >> kurang;
+            uang += kurang;
+            while (uang < totalHarga) {
+                cout << "Masih kurang. Silakan bayar dengan cukup." << endl;
+                cout << "Masukkan uang kembali: ";
+                cin >> kurang;
+                uang += kurang; 
+            }
+        }
+      
+        if (uang > totalHarga) {
+            selisih = uang - totalHarga;
+            cout << "Kembalian Anda: " << Rupiah(selisih) << endl;
+        } else if (uang == totalHarga) {
+            cout << "Uang Anda pas." << endl;
+            uangPas = true;
+        }
+   }else{
+     loading();
+   }
+    inputStruk();
+}
+
 void Transaksi::inputStruk(){
      char pilihanStruk;
      int noStruk = 0;
@@ -404,7 +459,7 @@ void Transaksi::struk(){
 
      ofstream nota("struk.txt");
      nota << "========================================\n";
-     nota << "           TOKO SERBA ADA AHTONG        \n";
+     nota << "           TOKO SERBA ADA UNCLE         \n";
      nota << "       Jl. Pembangunan No.123 Medan     \n";
      nota << "           Telp. (62) 8227211872        \n";
      nota << "========================================\n";
@@ -442,6 +497,7 @@ void Transaksi::struk(){
  
      nota << "----------------------------------------\n";
      nota << right << setw(29) << "Total: Rp" << setw(9) << Rupiah(totalHarga) << endl;
+     if(metodePembayaran == "cash"){
      nota << right << setw(29) << "Uang : Rp" << setw(9) << Rupiah(uang) << endl;
      if (uangPas == true)
      {
@@ -450,8 +506,13 @@ void Transaksi::struk(){
      {
           nota << right << setw(29) << "Kembalian : " << setw(9) << selisih << endl;
      }
+     }else
+     {
+     nota << right << setw(29) << "Uang : Rp" << setw(9) << Rupiah(totalHarga) << endl;
+     }
+
      nota << "========================================\n";
-     nota << "Terima kasih telah berbelanja di Ahtong\n";
+     nota << " Terima kasih telah berbelanja di Uncle \n";
      nota << "========================================\n";
  
      keranjang.close();
@@ -463,14 +524,31 @@ void Transaksi::struk(){
      kosongkan.close();
      
  }
- void Transaksi::loading() {
-    const int total = 50;
-
+void Transaksi::loading() {
+    system("cls");
     cout << "Memproses transaksi.";
-    for (int i = 0; i < total; ++i) {
-        cout << ".";
-        cout.flush(); 
-        Sleep(100);   
+    for (int i = 0; i < 5; ++i) {
+        cout << "."; 
+        Sleep(1500);   
     }
     cout << "Selesai!" << endl;
+}
+void Kasir::open(){
+    string input;
+    cout << "Ketik sesuatu untuk mulai: ";
+    getline(cin, input);
+
+    while (input != "hi uncle") {
+        cout << "Program masih tidur... coba lagi: ";
+        getline(cin, input);
+    }
+
+    cout << "\nSelamat datang di Kedai Uncle!" << endl;
+    Sleep(1500);
+    cout << "Menyiapkan program kasir";
+    for (int i = 0; i < 3; i++) {
+        cout << ".";
+        Sleep(500);
+    }
+    cout << "\n";
 }

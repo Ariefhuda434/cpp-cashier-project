@@ -28,6 +28,12 @@ const string BRIGHT_MAGENTA  = "\033[1;35m";
 const string BRIGHT_CYAN     = "\033[1;36m";
 const string BRIGHT_WHITE    = "\033[1;37m";
 
+const string BG_RED = "\033[41m";
+const string BG_GREEN = "\033[42m";
+const string RESET = "\033[0m";
+const string BG_CYAN = "\033[46m"; // Cyan background
+const string BG_YELLOW = "\033[43m"; // Yellow background
+
 
 class Kasir
 {
@@ -61,6 +67,7 @@ class Kasir
           virtual void head();
           void menu();
           void parse();
+          void open();
           string Rupiah(int);
           
      };
@@ -99,6 +106,7 @@ class Kasir
           string metodePembayaran;
           int uang,selisih;
           bool uangPas = false;
+          bool metodeIs = false;
           public:
           void head() override;
           void gantiMetode();
