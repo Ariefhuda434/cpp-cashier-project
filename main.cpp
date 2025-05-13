@@ -9,8 +9,9 @@ int main()
      Produk produk;
      Keranjang keranjang;
      Transaksi transaksi;
+     Kasir obj1;
      int pilihan;
-
+     obj1.open();
      produk.tampilkan();
 
      while(true)
